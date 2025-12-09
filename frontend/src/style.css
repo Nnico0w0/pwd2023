@@ -1,0 +1,133 @@
+:root {
+  /* Color Palette - Urban Slate */
+  --color-primary: #6B7C98;
+  --color-primary-dark: #5E5653;
+  --color-primary-light: #7B7F8A;
+  --color-secondary: #AB978C;
+  --color-secondary-dark: #5E5653;
+  --color-accent: #E9E6E7;
+  --color-accent-dark: #7B7F8A;
+  
+  /* Neutral Colors */
+  --color-white: #ffffff;
+  --color-gray-50: #E9E6E7;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #AB978C;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #7B7F8A;
+  --color-gray-600: #6B7C98;
+  --color-gray-700: #5E5653;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+  
+  /* Text Colors */
+  --color-text-primary: #5E5653;
+  --color-text-secondary: #6B7C98;
+  --color-text-light: #AB978C;
+  
+  /* Background Colors */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #E9E6E7;
+  --color-bg-tertiary: #f3f4f6;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(94, 86, 83, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(94, 86, 83, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(94, 86, 83, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(94, 86, 83, 0.1);
+  
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--color-primary-dark);
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-gray-900);
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--color-gray-800);
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-gray-800);
+}
+
+p {
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+button {
+  border-radius: 8px;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--color-primary);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+button:hover {
+  background-color: var(--color-primary-dark);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+button:focus,
+button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+#app {
+  min-height: 100vh;
+}
