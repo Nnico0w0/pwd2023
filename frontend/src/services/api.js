@@ -34,7 +34,7 @@ export const profesorService = {
 
 export const reservaAulaService = {
   getAll() {
-    return apiClient.get('/reserva-aula').then(response => response.data);
+    return apiClient.get('/reserva-aula?expand=aula,materias').then(response => response.data);
   }
 };
 
@@ -70,6 +70,6 @@ export default {
     return apiClient.get('/profesor');
   },
   getReservas() {
-    return apiClient.get('/reserva-aula');
+    return apiClient.get('/reserva-aula?expand=aula,materias');
   },
 };

@@ -100,6 +100,14 @@ class ReservaAula extends \yii\db\ActiveRecord
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function extraFields()
+    {
+        return ['aula', 'materias'];
+    }
+
+    /**
      * Gets query for [[Aula]].
      *
      * @return \yii\db\ActiveQuery|AulaQuery

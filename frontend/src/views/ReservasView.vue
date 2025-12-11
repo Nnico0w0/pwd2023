@@ -34,6 +34,16 @@
               <span class="label">🕑 Hasta:</span>
               <span class="value">{{ formatDateTime(reserva.fh_hasta) }}</span>
             </div>
+            <div class="info-item" v-if="reserva.materias && reserva.materias.length > 0">
+              <span class="label">📚 Materias:</span>
+              <span class="value">
+                <div class="materias-list">
+                  <span v-for="materia in reserva.materias" :key="materia.id" class="materia-tag">
+                    {{ materia.nombre }}
+                  </span>
+                </div>
+              </span>
+            </div>
             <div class="info-item" v-if="reserva.observacion">
               <span class="label">📝 Observación:</span>
               <span class="value">{{ reserva.observacion }}</span>
@@ -214,6 +224,22 @@ onMounted(() => {
   color: var(--color-text-primary, #2c3e50);
   font-weight: 500;
   text-align: right;
+}
+
+.materias-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.materia-tag {
+  background: #e3f2fd;
+  color: #1976d2;
+  padding: 0.2rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  display: inline-block;
 }
 
 .empty-state {
