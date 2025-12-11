@@ -9,7 +9,7 @@ class m251211_084552_add_admin_field_to_usuario extends Migration
      */
     public function safeUp()
     {
-        $this->addColumn('usuario', 'admin', $this->boolean()->defaultValue(false)->notNull());
+        $this->addColumn('usuario', 'admin', $this->boolean()->defaultValue(false));
     }
 
     /**
@@ -19,19 +19,4 @@ class m251211_084552_add_admin_field_to_usuario extends Migration
     {
         $this->dropColumn('usuario', 'admin');
     }
-
-    /*
-    // Use up()/down() to run migration code without a transaction.
-    public function up()
-    {
-
-    }
-
-    public function down()
-    {
-        echo "m251211_084552_add_admin_field_to_usuario cannot be reverted.\n";
-
-        return false;
-    }
-    */
 }

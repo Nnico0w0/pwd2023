@@ -25,22 +25,5 @@ class m251209_173359_crear_tabla_usuario extends Migration
     public function safeDown()
     {
         $this->dropTable('usuario');
-
-        return true;
     }
-
-    /*
-    // Use up()/down() to run migration code without a transaction.
-    public function up()
-    {
-
-    }
-
-    public function down()
-    {
-        echo "m251209_173359_crear_tabla_usuario cannot be reverted.\n";
-
-        return false;
-    }
-    */
 }
