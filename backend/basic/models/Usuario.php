@@ -14,6 +14,7 @@ use yii\web\IdentityInterface;
  * @property string|null $password
  * @property string|null $authkey
  * @property string|null $accesstoken
+ * @property bool $admin
  */
 class Usuario extends \yii\db\ActiveRecord implements IdentityInterface
 {
@@ -32,6 +33,7 @@ class Usuario extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return [
             [['username', 'name'], 'required'],
+            [['admin'], 'boolean'],
             [['username', 'name'], 'string', 'max' => 80],
             [['password', 'authkey', 'accesstoken'], 'string', 'max' => 255],
             [['username'], 'unique'],
@@ -50,6 +52,7 @@ class Usuario extends \yii\db\ActiveRecord implements IdentityInterface
             'password' => 'Password',
             'authkey' => 'Authkey',
             'accesstoken' => 'Accesstoken',
+            'admin' => 'Administrador',
         ];
     }
 
@@ -139,5 +142,13 @@ class Usuario extends \yii\db\ActiveRecord implements IdentityInterface
     public function generateAccessToken()
     {
         $this->accesstoken = Yii::$app->security->generateRandomString() . '_' . time();
+    }
+
+    /**
+     * Checks if user is admin
+     */
+    public function isAdmin()
+    {
+        return (bool) $this->admin;
     }
 }

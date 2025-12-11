@@ -13,6 +13,7 @@ class CreateAdminController extends Controller
         $usuario = new Usuario();
         $usuario->username = $username;
         $usuario->name = $name;
+        $usuario->admin = true;
         $usuario->password = Yii::$app->security->generatePasswordHash($password);
         $usuario->authkey = Yii::$app->security->generateRandomString();
         

@@ -11,7 +11,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\data\ActiveDataProvider;
 
-class CarreraController extends Controller
+class CarreraController extends BaseController
 {
     public function behaviors()
     {

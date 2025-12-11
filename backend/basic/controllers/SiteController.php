@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\filters\AdminFilter;
 
 class SiteController extends Controller
 {
@@ -26,11 +27,15 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index'],
+                        'actions' => ['logout'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
                 ],
+            ],
+            'adminFilter' => [
+                'class' => AdminFilter::class,
+                'only' => ['index'],
             ],
             'verbs' => [
                 'class' => VerbFilter::class,

@@ -4,8 +4,6 @@ import CarrerasView from '../views/CarrerasView.vue'
 import MateriasView from '../views/MateriasView.vue'
 import ProfesoresView from '../views/ProfesoresView.vue'
 import AulasView from '../views/AulasView.vue'
-import CalendarioView from '../views/CalendarioView.vue'
-import ComponentsView from '../views/ComponentsView.vue'
 import ReservasView from '../views/ReservasView.vue'
 import LoginView from '../views/LoginView.vue'
 import { authService } from '../services/api'
@@ -23,12 +21,6 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
-      meta: { requiresAuth: true }
-    },
-    {
-      path: '/components',
-      name: 'components',
-      component: ComponentsView,
       meta: { requiresAuth: true }
     },
     {
@@ -59,12 +51,6 @@ const router = createRouter({
       path: '/reservas',
       name: 'reservas',
       component: ReservasView,
-      meta: { requiresAuth: true }
-    },
-    {
-      path: '/calendario',
-      name: 'calendario',
-      component: CalendarioView,
       meta: { requiresAuth: true }
     }
   ]

@@ -10,7 +10,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\data\ActiveDataProvider;
 
-class ProfesorController extends Controller
+class ProfesorController extends BaseController
 {
     public function behaviors()
     {
