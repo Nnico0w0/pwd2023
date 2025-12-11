@@ -8,26 +8,6 @@ const apiClient = axios.create({
   },
 });
 
-export const authService = {
-  login(username, password) {
-    // Auto-login simple - cualquier usuario/contraseña funciona
-    localStorage.setItem('token', 'demo-token');
-    localStorage.setItem('user', JSON.stringify({ username, name: username }));
-    return Promise.resolve({ success: true, user: { username, name: username } });
-  },
-  logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-  },
-  getCurrentUser() {
-    const userStr = localStorage.getItem('user');
-    return userStr ? JSON.parse(userStr) : null;
-  },
-  isAuthenticated() {
-    return !!localStorage.getItem('token');
-  }
-};
-
 export const aulaService = {
   getAll() {
     return apiClient.get('/aula').then(response => response.data);
