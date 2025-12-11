@@ -17,7 +17,13 @@
     <div v-else class="reservas-grid">
       <div v-for="reserva in reservas" :key="reserva.id" class="reserva-card">
         <div class="reserva-header">
-          <h3>{{ reserva.aula?.descripcion || `Aula ${reserva.id_aula}` }}</h3>
+          <div>
+            <h3>{{ reserva.aula?.descripcion || `Aula ${reserva.id_aula}` }}</h3>
+            <p v-if="reserva.aula" class="aula-details">
+              👥 {{ reserva.aula.aforo }} personas • 🎥 {{ reserva.aula.cant_proyector }} proyector(es)
+              <span v-if="reserva.aula.es_climatizada"> • ❄️ Climatizada</span>
+            </p>
+          </div>
           <span class="reserva-id">#{{ reserva.id }}</span>
         </div>
         <div class="reserva-body">
@@ -34,14 +40,15 @@
               <span class="label">🕑 Hasta:</span>
               <span class="value">{{ formatDateTime(reserva.fh_hasta) }}</span>
             </div>
-            <div class="info-item" v-if="reserva.materias && reserva.materias.length > 0">
+            <div class="info-item">
               <span class="label">📚 Materias:</span>
               <span class="value">
-                <div class="materias-list">
+                <div v-if="reserva.materias && reserva.materias.length > 0" class="materias-list">
                   <span v-for="materia in reserva.materias" :key="materia.id" class="materia-tag">
                     {{ materia.nombre }}
                   </span>
                 </div>
+                <span v-else class="no-materias">Sin materias asignadas</span>
               </span>
             </div>
             <div class="info-item" v-if="reserva.observacion">
@@ -71,13 +78,17 @@ const formatDateTime = (dateTimeString) => {
   if (!dateTimeString) return 'No especificado'
   
   const date = new Date(dateTimeString)
+  
+  // Verificar si la fecha es válida
+  if (isNaN(date.getTime())) return 'Fecha inválida'
+  
   const options = {
     year: 'numeric',
-    month: 'short',
+    month: 'short', 
     day: 'numeric',
     hour: '2-digit',
     minute: '2-digit',
-    hour12: true
+    hour12: false
   }
   
   return date.toLocaleString('es-ES', options)
@@ -88,6 +99,7 @@ const fetchReservas = async () => {
     loading.value = true
     error.value = null
     const data = await reservaAulaService.getAll()
+    console.log('Reservas recibidas:', data)
     reservas.value = data
   } catch (err) {
     error.value = 'Error al cargar las reservas'
@@ -193,6 +205,12 @@ onMounted(() => {
   font-size: 1.25rem;
 }
 
+.aula-details {
+  margin: 0.25rem 0 0 0;
+  color: var(--color-text-secondary, #6c757d);
+  font-size: 0.85rem;
+}
+
 .reserva-id {
   background: var(--color-primary, #007bff);
   color: white;
@@ -240,6 +258,12 @@ onMounted(() => {
   font-size: 0.8rem;
   font-weight: 500;
   display: inline-block;
+}
+
+.no-materias {
+  color: #999;
+  font-style: italic;
+  font-size: 0.9rem;
 }
 
 .empty-state {
