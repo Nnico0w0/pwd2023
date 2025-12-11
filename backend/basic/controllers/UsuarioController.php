@@ -75,6 +75,7 @@ class UsuarioController extends BaseController
             {
                 $model->username=$_POST['Usuario']['username'];
                 $model->name=$_POST['Usuario']['name'];
+                $model->admin=isset($_POST['Usuario']['admin']) ? (bool)$_POST['Usuario']['admin'] : false;
                 $model->password=password_hash($_POST['Usuario']['password'], PASSWORD_BCRYPT);
                 $model->authkey=md5(random_bytes(5));
                 $model->accesstoken=password_hash(random_bytes(5), PASSWORD_DEFAULT);
@@ -108,10 +109,23 @@ class UsuarioController extends BaseController
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($this->request->isPost && $model->load($this->request->post())) {
+            // Si se proporciona una nueva contraseña, hashearla
+            if (!empty($model->password)) {
+                $model->password = password_hash($model->password, PASSWORD_BCRYPT);
+            } else {
+                // Si no se proporciona contraseña, mantener la actual
+                $model->password = $this->findModel($id)->password;
+            }
+            
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
+        // Limpiar contraseña para el formulario
+        $model->password = '';
+        
         return $this->render('update', [
             'model' => $model,
         ]);

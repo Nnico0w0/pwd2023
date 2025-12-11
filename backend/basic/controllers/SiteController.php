@@ -27,7 +27,7 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['logout', 'index'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -84,8 +84,18 @@ class SiteController extends Controller
         }
 
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->login()) {
+                // Verificar si el usuario logueado es admin
+                $user = Yii::$app->user->identity;
+                if (!$user || !$user->isAdmin()) {
+                    // Cerrar sesión y mostrar mensaje
+                    Yii::$app->user->logout();
+                    $model->addError('username', 'Solo los administradores pueden acceder al panel de administración.');
+                } else {
+                    return $this->goBack();
+                }
+            }
         }
 
         $model->password = '';

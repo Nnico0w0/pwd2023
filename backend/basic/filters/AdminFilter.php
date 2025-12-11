@@ -17,7 +17,7 @@ class AdminFilter extends ActionFilter
         
         $user = Yii::$app->user->identity;
         if (!$user || !$user->isAdmin()) {
-            throw new ForbiddenHttpException('Solo los administradores pueden acceder a esta sección.');
+            throw new ForbiddenHttpException('Acceso denegado. Solo administradores.');
         }
         
         return parent::beforeAction($action);

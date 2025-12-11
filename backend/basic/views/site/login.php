@@ -14,6 +14,12 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-login">
     <h1><?= Html::encode($this->title) ?></h1>
 
+    <?php if (Yii::$app->session->hasFlash('error') && !$model->hasErrors()): ?>
+        <div class="alert alert-danger">
+            <?= Yii::$app->session->getFlash('error') ?>
+        </div>
+    <?php endif; ?>
+
     <p>Please fill out the following fields to login:</p>
 
     <div class="row">

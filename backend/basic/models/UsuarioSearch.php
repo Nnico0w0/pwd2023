@@ -17,7 +17,7 @@ class UsuarioSearch extends Usuario
     public function rules()
     {
         return [
-            [['id'], 'integer'],
+            [['id', 'admin'], 'integer'],
             [['username', 'name', 'password', 'authkey', 'accesstoken'], 'safe'],
         ];
     }
@@ -59,6 +59,7 @@ class UsuarioSearch extends Usuario
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'admin' => $this->admin,
         ]);
 
         $query->andFilterWhere(['ilike', 'username', $this->username])

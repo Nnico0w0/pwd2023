@@ -32,6 +32,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'username',
             'name',
+            [
+                'attribute' => 'admin',
+                'format' => 'raw',
+                'value' => function($model) {
+                    return $model->admin ? 
+                        '<span class="badge badge-success">✓ Admin</span>' : 
+                        '<span class="badge badge-secondary">Usuario</span>';
+                },
+                'filter' => [1 => 'Admin', 0 => 'Usuario']
+            ],
             //'password',
             //'authkey',
             //'accesstoken',

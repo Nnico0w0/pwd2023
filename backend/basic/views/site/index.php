@@ -12,7 +12,11 @@ $this->title = 'Backoffice - Sistema de Gestión Universitaria';
     <div class="jumbotron text-center bg-primary text-white rounded mb-5 p-5">
         <h1 class="display-4">🎓 Sistema de Gestión Universitaria</h1>
         <p class="lead">Panel de Administración</p>
-        <p>Bienvenido, <strong><?= Yii::$app->user->identity->username ?></strong></p>
+        <?php if (!Yii::$app->user->isGuest && Yii::$app->user->identity): ?>
+            <p>Bienvenido, <strong><?= Yii::$app->user->identity->username ?></strong></p>
+        <?php else: ?>
+            <p>Acceso no autorizado</p>
+        <?php endif; ?>
     </div>
 
     <div class="body-content">
