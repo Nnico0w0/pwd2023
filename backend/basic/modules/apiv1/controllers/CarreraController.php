@@ -2,7 +2,9 @@
 
 namespace app\modules\apiv1\controllers;
 
+use app\models\Carrera;
+
 class CarreraController extends BaseController
 {
-    public $modelClass = 'app\models\Carrera';
+    public $modelClass = Carrera::class;
 }

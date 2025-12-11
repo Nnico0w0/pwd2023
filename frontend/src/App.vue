@@ -1,35 +1,17 @@
 <script setup>
-import { RouterLink, RouterView, useRoute, useRouter } from 'vue-router'
-import { computed, ref } from 'vue'
-import { authService } from './services/api'
-
-const route = useRoute()
-const router = useRouter()
-const user = ref(authService.getCurrentUser())
-
-const isAuthenticated = computed(() => authService.isAuthenticated())
-const showHeader = computed(() => route.path !== '/login')
-
-const handleLogout = () => {
-  authService.logout()
-  router.push('/login')
-}
+import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-  <header v-if="showHeader">
+  <header>
     <div class="wrapper">
       <div class="logo">
         <span class="logo-icon">🎓</span>
         <span class="logo-text">SGU</span>
       </div>
-      <nav v-if="isAuthenticated">
+      <nav>
         <RouterLink to="/" class="nav-link">🏠 Inicio</RouterLink>
       </nav>
-      <div v-if="isAuthenticated" class="user-section">
-        <span class="user-name">👤 {{ user?.username }}</span>
-        <button @click="handleLogout" class="btn-logout">Salir</button>
-      </div>
     </div>
   </header>
 
@@ -100,34 +82,6 @@ nav {
 .nav-link.router-link-exact-active {
   background: rgba(255, 255, 255, 0.25);
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.user-section {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.user-name {
-  color: white;
-  font-weight: 500;
-  font-size: 0.9rem;
-}
-
-.btn-logout {
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.btn-logout:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: translateY(-2px);
 }
 
 main {

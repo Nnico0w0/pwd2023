@@ -10,10 +10,10 @@ const apiClient = axios.create({
 
 export const authService = {
   login(username, password) {
-    // Mock login
-    localStorage.setItem('token', 'dummy-token');
-    localStorage.setItem('user', JSON.stringify({ username }));
-    return Promise.resolve({ success: true, user: { username } });
+    // Auto-login simple - cualquier usuario/contraseña funciona
+    localStorage.setItem('token', 'demo-token');
+    localStorage.setItem('user', JSON.stringify({ username, name: username }));
+    return Promise.resolve({ success: true, user: { username, name: username } });
   },
   logout() {
     localStorage.removeItem('token');

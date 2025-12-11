@@ -64,6 +64,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { authService } from '../services/api.js';
 
 const router = useRouter();
 const isRegister = ref(false);
@@ -91,17 +92,31 @@ const handleSubmit = async () => {
     loading.value = true;
     error.value = '';
 
-    // Simulación de login exitoso para desarrollo sin API
-    setTimeout(() => {
-        localStorage.setItem('token', 'dummy-token');
-        localStorage.setItem('user', JSON.stringify({ username: formData.value.username }));
-        router.push('/');
-        loading.value = false;
-    }, 1000);
+    if (isRegister.value) {
+      // TODO: Implementar registro cuando esté listo el endpoint
+      error.value = 'Funcionalidad de registro próximamente disponible';
+      loading.value = false;
+      return;
+    }
+
+    // Login real usando la API
+    const result = await authService.login(formData.value.username, formData.value.password);
+    
+    if (result.success) {
+      // Redirigir al dashboard
+      router.push('/');
+    } else {
+      // Mostrar error
+      error.value = result.message || 'Error al iniciar sesión';
+      if (result.errors && result.errors.password) {
+        error.value = result.errors.password[0];
+      }
+    }
 
   } catch (err) {
     console.error('Error:', err);
-    error.value = 'Error al procesar la solicitud';
+    error.value = 'Error al conectar con el servidor';
+  } finally {
     loading.value = false;
   }
 };
