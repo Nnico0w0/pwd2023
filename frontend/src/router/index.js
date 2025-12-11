@@ -6,6 +6,7 @@ import ProfesoresView from '../views/ProfesoresView.vue'
 import AulasView from '../views/AulasView.vue'
 import CalendarioView from '../views/CalendarioView.vue'
 import ComponentsView from '../views/ComponentsView.vue'
+import ReservasView from '../views/ReservasView.vue'
 import LoginView from '../views/LoginView.vue'
 import { authService } from '../services/api'
 
@@ -52,6 +53,12 @@ const router = createRouter({
       path: '/aulas',
       name: 'aulas',
       component: AulasView,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/reservas',
+      name: 'reservas',
+      component: ReservasView,
       meta: { requiresAuth: true }
     },
     {

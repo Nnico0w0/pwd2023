@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "reserva_aula".
@@ -62,7 +63,17 @@ class ReservaAula extends \yii\db\ActiveRecord
     public function afterFind()
     {
         parent::afterFind();
-        $this->materia_ids = \yii\helpers\ArrayHelper::getColumn($this->materias, 'id');
+        $this->materia_ids = ArrayHelper::getColumn($this->materias, 'id');
+    }
+
+    public function beforeSave($insert)
+    {
+        // Procesar materia_ids para asegurar que sea un array
+        if (!empty($this->materia_ids) && !is_array($this->materia_ids)) {
+            $this->materia_ids = [$this->materia_ids];
+        }
+        
+        return parent::beforeSave($insert);
     }
 
     public function afterSave($insert, $changedAttributes)
@@ -74,7 +85,10 @@ class ReservaAula extends \yii\db\ActiveRecord
         
         // Crear nuevas relaciones
         if (!empty($this->materia_ids)) {
-            foreach ($this->materia_ids as $materia_id) {
+            // Asegurar que materia_ids sea un array
+            $materiaIds = is_array($this->materia_ids) ? $this->materia_ids : [$this->materia_ids];
+            
+            foreach ($materiaIds as $materia_id) {
                 $horario = new HorarioMateria();
                 $horario->id_materia = $materia_id;
                 $horario->id_reserva = $this->id;

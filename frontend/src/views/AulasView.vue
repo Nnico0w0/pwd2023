@@ -39,7 +39,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import api from '../services/api'
+import { aulaService } from '../services/api'
 
 const aulas = ref([])
 const loading = ref(true)
@@ -48,11 +48,12 @@ const error = ref(null)
 const fetchAulas = async () => {
   try {
     loading.value = true
-    const response = await api.getAulas()
-    aulas.value = response.data
+    error.value = null
+    const data = await aulaService.getAll()
+    aulas.value = data
   } catch (err) {
-    error.value = 'Error al cargar las aulas'
-    console.error(err)
+    error.value = 'NetworkError when attempting to fetch resource.'
+    console.error('Error fetching aulas:', err)
   } finally {
     loading.value = false
   }

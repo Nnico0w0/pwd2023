@@ -34,17 +34,10 @@
         <div class="card-footer">Ver más →</div>
       </router-link>
       
-      <router-link to="/calendario" class="card card-reservas">
+      <router-link to="/reservas" class="card card-reservas">
         <div class="card-icon">📅</div>
         <h3>Reservas</h3>
-        <p>Calendario de ocupación de aulas</p>
-        <div class="card-footer">Ver más →</div>
-      </router-link>
-      
-      <router-link to="/calendario" class="card card-horarios">
-        <div class="card-icon">🕐</div>
-        <h3>Horarios</h3>
-        <p>Gestión de horarios de materias</p>
+        <p>Gestión de reservas de aulas</p>
         <div class="card-footer">Ver más →</div>
       </router-link>
     </div>

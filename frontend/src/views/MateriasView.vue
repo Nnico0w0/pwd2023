@@ -35,6 +35,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { materiaService } from '../services/api'
 
 const materias = ref([])
 const loading = ref(true)
@@ -43,16 +44,11 @@ const error = ref(null)
 const fetchMaterias = async () => {
   try {
     loading.value = true
-    const response = await fetch('http://localhost:8000/index.php?r=apiv1/materia')
-    
-    if (!response.ok) {
-      throw new Error('Error al cargar las materias')
-    }
-    
-    const data = await response.json()
+    error.value = null
+    const data = await materiaService.getAll()
     materias.value = data
   } catch (err) {
-    error.value = err.message
+    error.value = 'NetworkError when attempting to fetch resource.'
     console.error('Error fetching materias:', err)
   } finally {
     loading.value = false

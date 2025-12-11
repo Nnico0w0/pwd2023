@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const apiClient = axios.create({
-  baseURL: 'http://localhost:8080/apiv1', // Adjust port if necessary, usually 8080 for yii serve
+  baseURL: 'http://localhost:8000/apiv1', // Backend API URL
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',

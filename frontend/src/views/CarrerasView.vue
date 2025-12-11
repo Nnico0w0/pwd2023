@@ -33,6 +33,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { carreraService } from '../services/api'
 
 const carreras = ref([])
 const loading = ref(true)
@@ -41,16 +42,11 @@ const error = ref(null)
 const fetchCarreras = async () => {
   try {
     loading.value = true
-    const response = await fetch('http://localhost:8000/index.php?r=apiv1/carrera')
-    
-    if (!response.ok) {
-      throw new Error('Error al cargar las carreras')
-    }
-    
-    const data = await response.json()
+    error.value = null
+    const data = await carreraService.getAll()
     carreras.value = data
   } catch (err) {
-    error.value = err.message
+    error.value = 'NetworkError when attempting to fetch resource.'
     console.error('Error fetching carreras:', err)
   } finally {
     loading.value = false

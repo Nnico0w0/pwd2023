@@ -25,7 +25,6 @@ const handleLogout = () => {
       </div>
       <nav v-if="isAuthenticated">
         <RouterLink to="/" class="nav-link">🏠 Inicio</RouterLink>
-        <RouterLink to="/components" class="nav-link">🧩 Componentes</RouterLink>
       </nav>
       <div v-if="isAuthenticated" class="user-section">
         <span class="user-name">👤 {{ user?.username }}</span>
